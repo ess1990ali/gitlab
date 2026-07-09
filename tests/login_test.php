@@ -1,6 +1,6 @@
 <?php
 
-include "../src/config.php";
+include __DIR__ . "/../src/config.php";
 
 
 function assertTest($testName, $result)

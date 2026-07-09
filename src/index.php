@@ -1,4 +1,3 @@
-```php
 <?php
 include 'config.php';
 
@@ -208,4 +207,3 @@ if(isset($_POST['login'])){
 
 </body>
 </html>
-```

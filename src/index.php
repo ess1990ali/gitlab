@@ -7,22 +7,63 @@ if(isset($_POST['login'])){
     $password = $_POST['password'];
 
     $authenticated = false;
+    $error = "";
 
-    foreach($users as $user){
+    // Password validation
+    if(strlen($password) < 8){
 
-        if($user['email'] == $email && $user['password'] == $password){
+        $error = "Password must be at least 8 characters";
 
-            $_SESSION['user'] = $user['name'];
-            $authenticated = true;
+    }
+    elseif(!preg_match('/[A-Z]/', $password)){
 
-            header("Location: dashboard.php");
-            exit;
+        $error = "Password must contain at least one uppercase letter";
+
+    }
+    elseif(!preg_match('/[a-z]/', $password)){
+
+        $error = "Password must contain at least one lowercase letter";
+
+    }
+    elseif(!preg_match('/[0-9]/', $password)){
+
+        $error = "Password must contain at least one number";
+
+    }
+    elseif(str_contains($password, ';')){
+
+        $error = "Password cannot contain ; character";
+
+    }
+    else {
+
+
+        foreach($users as $user){
+
+            if(
+                $user['email'] == $email &&
+                $user['password'] == $password
+            ){
+
+                $_SESSION['user'] = $user['name'];
+                $authenticated = true;
+
+                header("Location: dashboard.php");
+                exit;
+
+            }
+
         }
+
+
+        if(!$authenticated){
+
+            $error = "Invalid email or password";
+
+        }
+
     }
 
-    if(!$authenticated){
-        $error = "Invalid email or password";
-    }
 }
 ?>
 

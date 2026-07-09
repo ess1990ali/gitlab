@@ -23,7 +23,7 @@ pipeline {
             steps {
 
                 bat '''
-                composer install
+                 C:\ProgramData\ComposerSetup\bin\composer.bat install
                 '''
 
             }

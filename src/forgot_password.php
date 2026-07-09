@@ -23,5 +23,6 @@ if(isset($_POST['submit'])){
 <input type="email" name="email" placeholder="Email" required>
 
 <button name="submit">Send Reset Link</button>
+<button name="submit">Sendd Reset Link</button>
 
 </form>

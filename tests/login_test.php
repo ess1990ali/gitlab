@@ -14,10 +14,10 @@ function assertTest($testName, $result)
 }
 
 
-// Test 1 - Correct login
+// Test 1: Correct email and password
 
 $email = "admin@test.com";
-$password = "123456";
+$password = "Password123";
 
 $found = false;
 
@@ -39,36 +39,12 @@ assertTest(
 
 
 
-// Test 2 - Wrong email
+// Test 2: Wrong email
 
 $email = "wrong@test.com";
+$password = "Password123";
 
 $found = false;
-
-foreach ($users as $user) {
-
-    if ($user['email'] == $email) {
-        $found = true;
-    }
-
-}
-
-
-assertTest(
-    "Invalid email rejected",
-    !$found
-);
-
-
-
-// Test 3 - Wrong password
-
-$email = "admin@test.com";
-$password = "wrongpass";
-
-
-$found = false;
-
 
 foreach ($users as $user) {
 
@@ -81,6 +57,30 @@ foreach ($users as $user) {
 
 }
 
+assertTest(
+    "Invalid email rejected",
+    !$found
+);
+
+
+
+// Test 3: Wrong password
+
+$email = "admin@test.com";
+$password = "WrongPassword";
+
+$found = false;
+
+foreach ($users as $user) {
+
+    if (
+        $user['email'] == $email &&
+        $user['password'] == $password
+    ) {
+        $found = true;
+    }
+
+}
 
 assertTest(
     "Invalid password rejected",
@@ -89,10 +89,9 @@ assertTest(
 
 
 
-// Test 4 - Password contains ;
+// Test 4: Password contains ;
 
-$password = "123;456";
-
+$password = "Password;123";
 
 assertTest(
     "Password with ; character rejected",
@@ -100,4 +99,6 @@ assertTest(
 );
 
 
-echo "All tests completed";
+echo "All tests completed successfully\n";
+
+?>

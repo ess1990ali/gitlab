@@ -18,14 +18,28 @@ pipeline {
 
 
 
+        stage('Install Dependencies') {
+
+            steps {
+
+                bat '''
+                composer install
+                '''
+
+            }
+
+        }
+
+
+
         stage('Run Tests') {
 
             steps {
 
-                echo "Running application tests..."
+                echo "Running PHP Unit Tests..."
 
                 bat '''
-                echo Add your PHP test command here
+                vendor\\bin\\phpunit tests
                 '''
 
             }
@@ -104,6 +118,5 @@ pipeline {
         }
 
     }
-
 
 }

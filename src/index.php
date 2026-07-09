@@ -6,36 +6,34 @@ if(isset($_POST['login'])){
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $result = $conn->query("SELECT * FROM users WHERE email='$email'");
+    $authenticated = false;
 
-    if($result->num_rows > 0){
+    foreach($users as $user){
 
-        $user = $result->fetch_assoc();
-
-        if(password_verify($password, $user['password'])){
+        if($user['email'] == $email && $user['password'] == $password){
 
             $_SESSION['user'] = $user['name'];
+            $authenticated = true;
 
             header("Location: dashboard.php");
-        }else{
-            echo "Wrong Password";
+            exit;
         }
+    }
 
-    }else{
-        echo "User Not Found";
+    if(!$authenticated){
+        echo "Invalid email or password";
     }
 }
 ?>
 
 <form method="POST">
 
-<input type="email" name="email" placeholder="Email" required><br><br>
+<input type="email" name="email" placeholder="Email" required>
+<br><br>
 
-<input type="password" name="password" placeholder="Password" required><br><br>
+<input type="password" name="password" placeholder="Password" required>
+<br><br>
 
 <button name="login">Login</button>
 
 </form>
-
-<a href="register.php">Register</a><br>
-<a href="forgot_password.php">Forgot Password?</a>

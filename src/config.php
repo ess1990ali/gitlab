@@ -1,9 +1,16 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "login_system");
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 session_start();
+
+$users = [
+    [
+        "name" => "Admin User",
+        "email" => "admin@test.com",
+        "password" => "Password123"
+    ],
+    [
+        "name" => "UAT User",
+        "email" => "uat@test.com",
+        "password" => "UAT123"
+    ]
+];
 ?>
